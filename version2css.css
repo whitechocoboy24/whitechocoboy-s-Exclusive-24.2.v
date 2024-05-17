@@ -1,0 +1,69 @@
+body{
+     background-image: url('https://whitechocoboy24.github.io/whitechocoboy-s-Exclusive-24.2.-assets/asset3.jpg');	
+}
+
+nav{
+	position: relative;
+	margin: 10px auto 0;
+	height: 45px;
+	bottom: 5px;
+	padding-top: 1px;
+	padding-bottom: 1px;
+	background-image: url('https://wallpaper-house.com/data/out/10/wallpaper2you_413377.jpg');
+	border-radius: 8px;
+	background-color: black;
+	font-size: 1px;
+	box-shadow: 0 8px 1px 0 #0b0b0be0;
+}
+nav a{
+	font-family: Maiandra GD;
+	font-weight: bold;
+	font-size: 15px;
+	line-height: 1%;
+	text-transform: uppercase;
+	color: #fb01e2;
+	text-decoration: none;
+	position: relative;
+	display: inline-block;
+	text-align: center;
+}
+
+h6{
+	font-family: Maiandra GD;
+	font-weight: bold;
+	font-size: 15px;
+	line-height: 1%;
+	color: #22fb01;
+}
+
+nav .animation{
+	position: absolute;
+	height: 6px;
+	bottom: 0px;
+	z-index: 0;
+	background: #0000002a;
+	box-shadow: 0px 3px 0px 1px rgba(0, 255, 255, 0.773);
+	border-radius: 8px;
+	transition: all .9s;
+}
+nav a:nth-child(1){
+	width: 100px;
+}
+nav .start-home, a:nth-child(1):hover~.animation{
+	width: 100px;
+	left: 0;
+}
+nav a:nth-child(2){
+	width: 110px;
+}
+nav .start-about, a:nth-child(2):hover~.animation{
+	width: 110px;
+	left: 100px;
+}
+nav a:nth-child(3){
+	width: 100px;
+}
+nav a:nth-child(3):hover~.animation{
+	width: 110px;
+	left: 200px;
+}
