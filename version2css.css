@@ -2,6 +2,18 @@ body{
      background-image: url('https://whitechocoboy24.github.io/whitechocoboy-s-Exclusive-24.2.-assets/asset3.jpg');	
 }
 
+.button {
+    top:40%;
+    background-color:#000000;
+    color: #fff;
+    border:none;
+    border-radius:10%;
+    box-shadow: 0 0 10px 0 #ff0000;
+    margin: 0% 0.1%;
+    font-size: 50%;
+    width: 10%;
+  }
+
 nav{
 	position: relative;
 	margin: 10px auto 0;
