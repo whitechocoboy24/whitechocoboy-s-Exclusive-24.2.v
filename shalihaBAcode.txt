@@ -1,0 +1,191 @@
+# Load necessary libraries
+library(ggplot2)
+library(dplyr)
+
+# Load the occupation data
+occupation_data <- read.csv("Prestige_New.csv")
+Emp_Perfor<- read.csv("Prestige_New.csv")
+
+
+
+MinistryOf_IndustryAndCommerce <- read.csv("Prestige_New.csv")
+print(MinistryOf_IndustryAndCommerce)
+
+Minimum_Income <- min(MinistryOf_IndustryAndCommerce$income)
+print(Minimum_Income)
+
+Maximum_Income <- max(MinistryOf_IndustryAndCommerce$income)
+print(Maximum_Income)
+
+Mean_Income <- mean(MinistryOf_IndustryAndCommerce$income)
+print(Mean_Income)
+
+Median_Income <- median(MinistryOf_IndustryAndCommerce$income)
+print(Median_Income)
+
+mode = function(){
+  return(names(sort(-table(MinistryOf_IndustryAndCommerce$income)))[1])
+}
+mode()
+
+#Task 04
+
+Summary_Of_Prestige <- summary(MinistryOf_IndustryAndCommerce$prestige)
+print(Summary_Of_Prestige)
+
+Summary_Of_Education <- summary(MinistryOf_IndustryAndCommerce$education)
+print(Summary_Of_Education)
+
+Summary_Of_Income <- summary(MinistryOf_IndustryAndCommerce$income)
+print(Summary_Of_Income)
+
+#Task 05 
+
+#Analysis for Prestige, Education and Income
+
+#Prestige Histogram 
+hist(MinistryOf_IndustryAndCommerce$prestige, 
+     probability = TRUE, 
+     xlab = "Prestige", 
+     main = "Histogram of Prestige of Incumbents", 
+     col = "lightblue", 
+     border = "black")
+
+# Prestige Standard Deviation
+SD_Prestige <- sd(MinistryOf_IndustryAndCommerce$prestige)
+Mean_Prestige <- mean(MinistryOf_IndustryAndCommerce$prestige)
+
+# Adding Prestige Bell Curve
+curve(dnorm(x, mean = Mean_Prestige, sd = SD_Prestige), add = TRUE, col = "black")
+
+# Normality Test for Prestige
+shapiro.test(MinistryOf_IndustryAndCommerce$prestige)
+
+# Education Histogram
+hist(MinistryOf_IndustryAndCommerce$education, 
+     probability = TRUE, 
+     xlab = "Education (Years)", 
+     main = "Histogram of Incumbents' Education", 
+     col = "lightpink", 
+     border = "black")
+
+
+# Standard Deviation for Education
+SD_Education <- sd(MinistryOf_IndustryAndCommerce$education)
+Mean_Education <- mean(MinistryOf_IndustryAndCommerce$education)
+
+# Bell curve for Education
+curve(dnorm(x, mean = Mean_Education, sd = SD_Education), 
+      add = TRUE, col = "black")
+
+# Normality Test for Education
+shapiro.test(MinistryOf_IndustryAndCommerce$education)
+
+# Income Histogram
+hist(MinistryOf_IndustryAndCommerce$income, 
+     probability = TRUE, 
+     xlab = "Income", 
+     main = "Histogram of Income of Incumbents", 
+     col = "orange", 
+     border = "black")
+
+# Standard Deviation for Income
+SD_Income <- sd(MinistryOf_IndustryAndCommerce$income)
+MeanIncome <- mean(MinistryOf_IndustryAndCommerce$income)
+
+# Bell curve for Income
+curve(dnorm(x, mean = MeanIncome, sd = SD_Income), 
+      add = TRUE, col = "black")
+
+# Normality Test for Income
+shapiro.test(MinistryOf_IndustryAndCommerce$income)
+
+# Summary Statistics for Each Variable
+summary(MinistryOf_IndustryAndCommerce$prestige)
+summary(MinistryOf_IndustryAndCommerce$education)
+summary(MinistryOf_IndustryAndCommerce$income)
+
+
+#Task 06
+install.packages("ggplot2")
+library(ggplot2)
+
+MinistryOf_IndustryAndCommerce$Occupation <- as.factor(MinistryOf_IndustryAndCommerce$Occupation)
+
+anova_result <- aov(prestige ~ Occupation, data = MinistryOf_IndustryAndCommerce)
+summary(anova_result)
+
+#Distribution of prestige by occupation type using a box plot
+ggplot(MinistryOf_IndustryAndCommerce, aes(x= Occupation, y= prestige)) +
+  geom_boxplot(fill="blue", col="black") +
+  labs(title="Prestige of Incumbents by Occupation",
+       x="Occupation",
+       y="prestige") +
+  theme_minimal()
+
+
+#Task 07
+
+# Scatter plot for Prestige vs Education
+ggplot(MinistryOf_IndustryAndCommerce, aes(x = education, y = prestige)) +
+  geom_point(color = "blue", size = 2) +
+  labs(
+    title = "Scatter Plot of Prestige vs Education of Incumbents",
+    x = "Education Level (Years)",
+    y = "Prestige Score"
+  ) +
+  theme_minimal()
+
+#Correlation between education and prestige
+correlation <- cor(MinistryOf_IndustryAndCommerce$education, MinistryOf_IndustryAndCommerce$prestige)
+cat("Correlation between education and prestige:", correlation, "\n")
+
+# Fit linear regression model for prestige based on education
+linear_model <- lm(prestige ~ education, data = MinistryOf_IndustryAndCommerce)
+
+# Display summary of the linear model
+summary(linear_model)
+
+
+
+#Task 08
+
+library(ggplot2)
+
+ggplot(MinistryOf_IndustryAndCommerce, aes(x = income, y = prestige)) +
+  geom_point(color = "red") +
+  labs(title = "Scatter Plot of Income vs Prestige of Incumbents",
+       x = "Income (in thousands of dollars)",
+       y = "Prestige Score") +
+  theme_minimal()
+
+
+correlation <- cor(MinistryOf_IndustryAndCommerce$income, MinistryOf_IndustryAndCommerce$prestige)
+print(paste("Correlation coefficient between income and prestige:", round(correlation, 3)))
+
+linear_model <- lm(prestige ~ income, data = MinistryOf_IndustryAndCommerce)
+summary(linear_model)
+
+
+#Task 09
+
+library(ggplot2)
+
+# Scatter plot of percentage of women vs prestige
+ggplot(MinistryOf_IndustryAndCommerce, aes(x = women, y = prestige)) +
+  geom_point(color = "brown") +
+  labs(title = "Scatter Plot of Percentage of Women vs Prestige of Incumbents",
+       x = "Percentage of Women",
+       y = "Prestige Score") +
+  theme_minimal()
+
+correlation <- cor(MinistryOf_IndustryAndCommerce$women, MinistryOf_IndustryAndCommerce$prestige)
+print(paste("Correlation coefficient between percentage of women and prestige:", correlation))
+
+cor_test <- cor.test(MinistryOf_IndustryAndCommerce$women, MinistryOf_IndustryAndCommerce$prestige)
+print(cor_test)
+
+shapiro_test_women <- shapiro.test(MinistryOf_IndustryAndCommerce$women)
+shapiro_test_prestige <- shapiro.test(MinistryOf_IndustryAndCommerce$prestige)
+print(shapiro_test_women)
+print(shapiro_test_prestige)
